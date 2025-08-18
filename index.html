@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <h1>Library</h1>
+    <div class="container">
+      <div class="cards" id="cards"></div>
+      <div class="sidebar" id="sidebar">
+        <form
+          id="add-book-form"
+          action=""
+          method="post"
+          aria-label="Add a new book"
+        >
+          <div class="field title-field">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" required />
+          </div>
+
+          <div class="field author-field">
+            <label for="author">Author</label>
+            <input id="author" name="author" type="text" required />
+          </div>
+
+          <div class="field pages-field">
+            <label for="pages">Pages</label>
+            <input id="pages" name="pages" type="number" min="1" required />
+          </div>
+
+          <div class="field read-field">
+            <label for="read">Read</label>
+            <select id="read" name="read" required>
+              <option value="No" selected>No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </div>
+
+          <div class="field actions">
+            <button type="submit" class="add-book">Add book</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
