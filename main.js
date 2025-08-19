@@ -8,6 +8,11 @@ function Book(title, author, pages, read) {
   this.id = crypto.randomUUID();
 }
 
+// add shared method once on the prototype
+Book.prototype.toggleRead = function () {
+  this.read = this.read === "No" ? "Yes" : "No";
+};
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -85,7 +90,8 @@ cardsContainer.addEventListener("click", function (e) {
     const bookId = markBtn.id.replace("markread-", "");
     const book = myLibrary.find((b) => b.id === bookId);
     if (book) {
-      book.read = book.read === "No" ? "Yes" : "No";
+      // use the prototype method instead of mutating inline
+      book.toggleRead();
       viewBooks(myLibrary);
     }
     return;
