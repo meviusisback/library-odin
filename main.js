@@ -1,17 +1,18 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = crypto.randomUUID();
-}
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = crypto.randomUUID();
+  }
 
-// add shared method once on the prototype
-Book.prototype.toggleRead = function () {
-  this.read = this.read === "No" ? "Yes" : "No";
-};
+  toggleRead() {
+    this.read = this.read === "No" ? "Yes" : "No";
+  }
+}
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
@@ -83,8 +84,7 @@ function viewBooks(library) {
   }
 }
 
-const cardsContainer = document.getElementById("cards");
-cardsContainer.addEventListener("click", function (e) {
+function cardsButtons(e) {
   const markBtn = e.target.closest("button.mark-read");
   if (markBtn) {
     const bookId = markBtn.id.replace("markread-", "");
@@ -107,10 +107,17 @@ cardsContainer.addEventListener("click", function (e) {
     }
     return;
   }
-});
+}
 
-const sidebar = document.getElementById("add-book-form");
-sidebar.addEventListener("submit", function (e) {
+function toggleDiv() {
+  if (sidebarDiv.style.display === "none" || sidebarDiv.style.display === "") {
+    sidebarDiv.style.display = "flex";
+  } else {
+    sidebarDiv.style.display = "none";
+  }
+}
+
+function bookFeed(e) {
   e.preventDefault();
   const formData = new FormData(sidebar);
   const title = (formData.get("title") || "").toString().trim();
@@ -121,13 +128,21 @@ sidebar.addEventListener("submit", function (e) {
   if (!title || !author || !pages) {
     return;
   }
-
   const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
   viewBooks(myLibrary);
   sidebar.reset();
-});
+}
 
+const cardsContainer = document.getElementById("cards");
+cardsContainer.addEventListener("click", cardsButtons);
+const sidebarDiv = document.getElementById("sidebar");
+const buttonNewBook = document.getElementById("new-book");
+buttonNewBook.addEventListener("click", toggleDiv);
+const sidebar = document.getElementById("add-book-form");
+sidebar.addEventListener("submit", bookFeed);
+
+// Dummy book for testing
 const theHobbit = new Book("The Hobbit", "Tolkien", "295", "No");
 addBookToLibrary(theHobbit);
 

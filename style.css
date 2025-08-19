@@ -21,13 +21,22 @@ body h1 {
   text-align: center;
 }
 
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px; 
+  min-width: 710px;
+}
+
 .container {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
 
 .sidebar {
-  display: flex;
+  display: none;
   flex-direction: column;
   margin: 40px;
   padding: 15px;
@@ -58,19 +67,30 @@ div input, div select {
   border-radius: 5px;
   background: linear-gradient(to right, rgb(30, 7, 116), rgb(88, 88, 177));
   color: white;
+  margin-top: 10px;
   padding: 10px;
   /* smooth hover animation */
     transition: transform 220ms cubic-bezier(.2, .8, .2, 1), box-shadow 220ms cubic-bezier(.2, .8, .2, 1), filter 220ms ease, background 300ms ease;
     will-change: transform, box-shadow;
 }
 
-.add-book:hover {
-  border-radius: 5px;
+.new-book {
+  position: absolute;
+  right: 40px;
+  border-radius: 10px;
   background: linear-gradient(to right, rgb(71, 59, 115), rgb(10, 10, 67));
   color: white;
+  font-weight: 700;
   padding: 10px;
-  
+  overflow: hidden;
 }
+
+.add-book:hover {
+  background: linear-gradient(to right, rgb(71, 59, 115), rgb(10, 10, 67));
+}
+
+.new-book:hover {
+  background: linear-gradient(to right, rgb(30, 7, 116), rgb(88, 88, 177));}
 
 .field.actions {
   display: flex;
@@ -97,6 +117,7 @@ div input, div select {
   /* smooth hover animation */
   transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1), filter 220ms ease, background 300ms ease;
   will-change: transform, box-shadow;
+  height: 200px;
 }
 
 .card:hover {
