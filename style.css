@@ -37,10 +37,6 @@ body h1 {
   height: 200px;
 }
 
-.sidebar:hover {
-  transform: translateY(-6px) scale(1.03);
-}
-
 form div {
   padding: 5px;
   min-width: 300px;
