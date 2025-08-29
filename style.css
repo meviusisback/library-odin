@@ -1,20 +1,30 @@
 /* Load DM Sans from Google Fonts and set as default */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
-html, body {
-	font-family: 'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+html,
+body {
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Optional sensible defaults */
-h1,h2,h3,h4,h5,h6 {
-	font-family: 'DM Sans', inherit;
-	font-weight: 500;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Sans", inherit;
+  font-weight: 500;
 }
 
-button, input, textarea, select {
-	font-family: inherit;
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 body h1 {
@@ -26,7 +36,7 @@ body h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 40px; 
+  padding: 16px 40px;
   min-width: 710px;
 }
 
@@ -43,7 +53,7 @@ body h1 {
   border: 1px solid blue;
   min-width: 300px;
   box-shadow: 0px 3px 8px 1px black;
-  height: 200px;
+  min-height: 200px;
 }
 
 form div {
@@ -53,14 +63,21 @@ form div {
   overflow: hidden;
 }
 
-
-div input, div select {
+form div input,
+form div select {
   position: absolute;
   right: 10px;
   border-radius: 8px;
   border: 2px solid darkgrey;
   background-color: rgb(237, 237, 237);
   padding: 2px;
+}
+
+/* Error styling */
+.field.error input,
+.field.error select {
+  border-color: red;
+  background-color: #ffe6e6;
 }
 
 .add-book {
@@ -70,8 +87,10 @@ div input, div select {
   margin-top: 10px;
   padding: 10px;
   /* smooth hover animation */
-    transition: transform 220ms cubic-bezier(.2, .8, .2, 1), box-shadow 220ms cubic-bezier(.2, .8, .2, 1), filter 220ms ease, background 300ms ease;
-    will-change: transform, box-shadow;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 220ms ease,
+    background 300ms ease;
+  will-change: transform, box-shadow;
 }
 
 .new-book {
@@ -90,7 +109,8 @@ div input, div select {
 }
 
 .new-book:hover {
-  background: linear-gradient(to right, rgb(30, 7, 116), rgb(88, 88, 177));}
+  background: linear-gradient(to right, rgb(30, 7, 116), rgb(88, 88, 177));
+}
 
 .field.actions {
   display: flex;
@@ -115,14 +135,16 @@ div input, div select {
   -webkit-box-shadow: 5px 5px 0px 0px #000000;
   box-shadow: 5px 5px 0px 0px #000000;
   /* smooth hover animation */
-  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1), filter 220ms ease, background 300ms ease;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 220ms ease,
+    background 300ms ease;
   will-change: transform, box-shadow;
   height: 200px;
 }
 
 .card:hover {
   transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   /* slightly brighten / shift the gradient for hover */
   background: linear-gradient(to right, #111117, #1e66d1);
   filter: brightness(1.04);
@@ -138,8 +160,6 @@ div input, div select {
     filter: none;
   }
 }
-
-
 
 .book-details {
   display: flex;
@@ -183,5 +203,4 @@ div input, div select {
   border-radius: 10px;
   background-color: white;
   color: black;
-
 }

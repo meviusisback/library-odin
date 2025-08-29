@@ -52,7 +52,30 @@ class FormHandler {
   }
 
   validateForm(data) {
-    return data.title && data.author && data.pages;
+    const errors = {};
+    const regex = /^[A-Za-zÀ-ÿ\s\-']+$/;
+    if (!data.title) {
+      errors.title = "Title is required";
+    } else if (!regex.test(data.title)) {
+      errors.title = "Title can only contain letters, spaces, hyphens, and apostrophes";
+    }
+
+    if (!data.author) {
+      errors.author = "Author is required";
+    } else if (!regex.test(data.author)) {
+      errors.author = "Author can only contain letters, spaces, hyphens, and apostrophes";
+    }
+
+    if (!data.pages) {
+      errors.pages = "Pages is required";
+    } else if (isNaN(data.pages) || parseInt(data.pages) <= 0) {
+      errors.pages = "Pages must be a positive number";
+    }
+
+    return {
+      isValid: Object.keys(errors).length === 0,
+      errors,
+    };
   }
 
   resetForm() {
@@ -102,8 +125,28 @@ class UIController {
     }
   }
 
+  handleFormValidation() {
+    // Clear any previous error styling
+    this.clearFormErrors();
+
+    const formData = this.formHandler.getFormData();
+    const validation = this.formHandler.validateForm(formData);
+
+    if (!validation.isValid) {
+      this.displayFormErrors(validation.errors);
+      return false;
+    }
+
+    return true;
+  }
+
   handleFormSubmit(event) {
     event.preventDefault();
+
+    if (!this.handleFormValidation()) {
+      return; // Don't submit if validation fails
+    }
+
     const formData = this.formHandler.getFormData();
     const newBook = new Book(
       formData.title,
@@ -114,7 +157,39 @@ class UIController {
     this.library.addBook(newBook);
     this.renderBooks(this.library.getBook());
     this.formHandler.resetForm();
+    this.clearFormErrors();
     this.toggleSidebar();
+  }
+
+  clearFormErrors() {
+    // Remove any existing error messages
+    const errorElements = this.formElement.querySelectorAll(".error-message");
+    errorElements.forEach((el) => el.remove());
+
+    // Remove error styling
+    const errorFields = this.formElement.querySelectorAll(".field.error");
+    errorFields.forEach((field) => field.classList.remove("error"));
+  }
+
+  displayFormErrors(errors) {
+    this.clearFormErrors();
+
+    Object.keys(errors).forEach((fieldName) => {
+      const fieldElement = this.formElement.querySelector(`#${fieldName}`);
+      if (fieldElement) {
+        const fieldContainer = fieldElement.closest(".field");
+        fieldContainer.classList.add("error");
+
+        const errorElement = document.createElement("div");
+        errorElement.className = "error-message";
+        errorElement.style.color = "red";
+        errorElement.style.fontSize = "0.8em";
+        errorElement.style.marginTop = "4px";
+        errorElement.textContent = errors[fieldName];
+
+        fieldContainer.appendChild(errorElement);
+      }
+    });
   }
 
   toggleSidebar() {
